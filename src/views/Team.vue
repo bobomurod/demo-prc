@@ -84,7 +84,7 @@
         </v-flex>
 
       </v-layout>
-      
+
       <!-- <v-card flat >
         <v-layout row wrap>
           <v-flex class="pa-3" xs12 md6>
@@ -223,8 +223,8 @@
           </v-flex>
         </v-layout>
       </v-card> -->
-      
-      
+
+
     </v-container>
 
   </div>
@@ -236,8 +236,8 @@ export default {
   data() {
     return {
       person1: {
-        name: 'data_name'
-      }
+        name: 'data_name',
+      },
     };
   },
 
@@ -247,16 +247,16 @@ export default {
       fetch('http://192.168.0.100:5001/client', {
         method: 'GET',
         headers: {
-          'Content-type': 'application/json'
-        }
-      }).then(rawData => rawData.json()).then(clients => {
-        console.log(JSON.stringify(clients))
-      })
-    }
+          'Content-type': 'application/json',
+        },
+      }).then(rawData => rawData.json()).then((clients) => {
+        console.log(JSON.stringify(clients));
+      });
+    },
   },
 
   created() {
-       this.getClients() 
+    this.getClients();
     //    {
     //   fetch('http://192.168.0.100:5001/client', {
     //     method: 'GET',
@@ -269,6 +269,5 @@ export default {
     // }
   },
 
-}
+};
 </script>
-

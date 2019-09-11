@@ -35,21 +35,21 @@
 
 <script>
 export default {
-    name: 'Navbar',
-    data(){
-        return {
-            drawer: false,
-            links: [
-                {icon: 'dashboard', text: 'Dashboard', route: '/'},
-                {icon: 'folder', text: 'My Projects', route: '/projects'},
-                {icon: 'person', text: 'Team', route: '/team'},
-                {icon: 'settings_overscan', text: 'Buttons', route: '/buttons'},
-                {icon: 'web', text: 'Breakpoints', route: '/breakpoints'},
-                {icon: 'view_quilt', text: 'Griding 1', route: 'grids1'},
-            ]
-        }
-    }
-}
+  name: 'Navbar',
+  data() {
+    return {
+      drawer: false,
+      links: [
+        { icon: 'dashboard', text: 'Dashboard', route: '/' },
+        { icon: 'folder', text: 'My Projects', route: '/projects' },
+        { icon: 'person', text: 'Team', route: '/team' },
+        { icon: 'settings_overscan', text: 'Buttons', route: '/buttons' },
+        { icon: 'web', text: 'Breakpoints', route: '/breakpoints' },
+        { icon: 'view_quilt', text: 'Griding 1', route: 'grids1' },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
