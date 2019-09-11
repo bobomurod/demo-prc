@@ -183,41 +183,178 @@
 
 
         <v-flex pa-2>
-           <v-card flat >
+          <v-card flat >
             <v-layout row wrap>
           <v-flex class="pa-3" xs12 md6>
             <div class="grey--text">
-              Project title
+              Клиент ФИО
             </div>
             <div>
-              Create new website
+              {{ object2.client.firstName + " " + object2.client.lastName }}
+            </div>
+
+            <div class="grey--text">
+              Номер телефона
+            </div>
+            <div>
+              {{ "+"+object2.client.phone }}
             </div>
           </v-flex>
+
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
-              Person
+              Баланс
             </div>
             <div>
-              The Net Ninja
+              {{ object2.balance }}
+            </div>
+            <div class="grey--text">
+              Дата рождения
+            </div>
+            <div>
+              {{ object2.client.birthDate }}
             </div>
           </v-flex>
-          <v-flex xs6 sm4 md2 class="pa-3">
+
+          <v-flex xs2 sm4 md2 class="pa-3">
             <div class="grey--text">
-              Due by
+              Статус
             </div>
             <div>
-              1st Jun 2019
+              {{ object2.type.title }}
+            </div>
+            <div class="grey--text">
+              Person Code
+            </div>
+            <div>
+              {{ object2.client.personCode }}
+            </div>
+            
+          </v-flex>
+
+        </v-layout>
+
+        <v-layout row wrap>
+          <v-flex class="pa-3" xs12 md6>
+            <div class="grey--text">
+              Серия и номер паспорта
+            </div>
+            <div>
+              {{ object2.client.document.series + " " + object2.client.document.number }}
+            </div>
+            <div class="grey--text">
+              Issue date
+            </div>
+            <div>
+              {{ object2.client.document.issueDate }}
+            </div>
+            <div class="grey--text">
+              Expires
+            </div>
+            <div>
+              {{ object2.client.document.expireDate }}
+            </div>
+            <div class="grey--text">
+              Выдан
+            </div>
+            <div>
+              {{ object2.client.document.issuer }}
+            </div>
+            <div class="grey--text">
+              Место рождения
+            </div>
+            <div>
+              {{ object2.client.birthPlace }}
+            </div>
+          </v-flex>
+          
+          <v-flex xs6 sm4 md2 class="pa-3">
+            <div class="grey--text">
+              Страна
+            </div>
+            <div>
+              {{ object2.client.document.country }}
+            </div>
+             <div class="grey--text">
+              Национальность
+            </div>
+            <div>
+              {{ object2.client.nationality }}
+            </div>
+            <div class="grey--text">
+              MRZ
+            </div>
+            <div>
+              {{ object2.client.document.mrz }}
             </div>
           </v-flex>
           <v-flex xs2 sm4 md2 class="pa-3">
             <div class="grey--text">
-              Status
+              Пол
             </div>
             <div>
-              Ongoing
+              {{ object2.client.gender }}
             </div>
           </v-flex>
         </v-layout>
+
+        <v-layout row wrap>
+          <v-flex class="pa-3" xs12 md6>
+            <div class="grey--text">
+              IBAN
+            </div>
+            <div>
+              {{ object2.iban }}
+            </div>
+            <div class="grey--text">
+              PAN
+            </div>
+            <div>
+              {{ object2.pan }}
+            </div>
+            <div class="grey--text">
+              BANK
+            </div>
+            <div>
+              {{ object2.bank.title }}
+            </div>
+            <div class="grey--text">
+              Bank BIN number
+            </div>
+            <div>
+              {{ object2.bank.bin }}
+            </div>
+            
+          </v-flex>
+          <v-flex xs6 sm4 md2 class="pa-3">
+            <div class="grey--text">
+              Единица
+            </div>
+            <div>
+              {{ object2.currency.title }}
+            </div>
+          </v-flex>
+          <v-flex xs6 sm4 md2 class="pa-3">
+            <div class="grey--text">
+              Код единицы
+            </div>
+            <div>
+              {{ object2.currency.code }}
+            </div>
+            
+          </v-flex>
+          
+        </v-layout>
+
+        <v-layout row wrap>
+          <v-flex>
+            <v-img :src="object2.client.photos.nfcFace" ></v-img>
+          </v-flex>
+          <v-flex>
+            <v-img :src="object2.client.photos.selfieDocument" ></v-img>
+          </v-flex>
+        </v-layout>
+
           </v-card>
         </v-flex>
 
