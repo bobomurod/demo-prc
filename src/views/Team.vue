@@ -1,6 +1,6 @@
 <template>
   <div class="team">
-    <h1 class="subheading grey--text">This is Team page</h1>
+    <h1 class="subheading grey--text">This is Demo page</h1>
 
     <v-container class="my-5" >
       <v-layout row>
@@ -9,34 +9,119 @@
             <v-layout row wrap>
           <v-flex class="pa-3" xs12 md6>
             <div class="grey--text">
-              Project title
+              Клиент ФИО
             </div>
             <div>
-              Create new website
+              {{ object1.client.firstName + " " + object1.client.lastName }}
+            </div>
+            
+            <div class="grey--text">
+              Номер телефона
+            </div>
+            <div>
+              {{ "+"+object1.client.phone }}
+            </div>
+          </v-flex>
+          
+          <v-flex xs6 sm4 md2 class="pa-3">
+            <div class="grey--text">
+              Баланс
+            </div>
+            <div>
+              {{ object1.balance }}
+            </div>
+            <div class="grey--text">
+              Дата рождения
+            </div>
+            <div>
+              {{ object1.client.birthDate }}
+            </div>
+          </v-flex>
+          
+          <v-flex xs2 sm4 md2 class="pa-3">
+            <div class="grey--text">
+              Статус
+            </div>
+            <div>
+              {{ object1.type.title }}
+            </div>
+            <div class="grey--text">
+              Person Code
+            </div>
+            <div>
+              {{ object1.client.personCode }}
+            </div>
+            <div class="grey--text">
+              Статус
+            </div>
+            <div>
+              {{ object1.type.title }}
+            </div>
+          </v-flex>
+          
+        </v-layout>
+        
+        <v-layout row wrap>
+          <v-flex class="pa-3" xs12 md6>
+            <div class="grey--text">
+              Серия и номер паспорта
+            </div>
+            <div>
+              {{ object1.client.document.series + " " + object1.client.document.number }}
+            </div>
+            <div class="grey--text">
+              Issue date
+            </div>
+            <div>
+              {{ object1.client.document.issueDate }}
+            </div>
+            <div class="grey--text">
+              Expires
+            </div>
+            <div>
+              {{ object1.client.document.expireDate }}
+            </div>
+            <div class="grey--text">
+              Выдан
+            </div>
+            <div>
+              {{ object1.client.document.issuer }}
+            </div>
+            <div class="grey--text">
+              Место рождения
+            </div>
+            <div>
+              {{ object1.client.birthPlace }}
             </div>
           </v-flex>
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
-              Person
+              Expires
             </div>
             <div>
-              The Net Ninja
+              {{ object1.client.document.expireDate }}
             </div>
           </v-flex>
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
-              Due by
+              Страна
             </div>
             <div>
-              1st Jun 2019
+              {{ object1.client.document.country }}
+            </div>
+             <div class="grey--text">
+              Национальность
+            </div>
+            <div>
+              {{ object1.client.nationality }}
             </div>
           </v-flex>
           <v-flex xs2 sm4 md2 class="pa-3">
             <div class="grey--text">
-              Status
+              Пол
             </div>
             <div>
-              Ongoing
+              {{ object1.client.gender }}
             </div>
           </v-flex>
         </v-layout>
@@ -230,13 +315,63 @@
   </div>
 </template>
 
+
+
 <script>
 export default {
 
   data() {
     return {
-      person1: {
-        name: 'data_name',
+      // person1: {
+      //   code: null,
+      //   balance: null,
+      //   createTime: null,
+      //   _wallet_id: null,
+      //   registerTime: null,
+      //   _client_id: null,
+      //   firstName: null,
+      //   lastName: null,
+      //   middleName: null,
+      //   phone: null,
+      //   gender: null,
+      //   personCode: null,
+      //   nationality: null,
+      //   birthDate: null,
+      //   birthPlace: null,
+      //   photos: {
+      //     nfcFace: null,
+      //     selfieDocument: null,
+      //   },
+      //   document: {
+      //     docType: null,
+      //     series: null,
+      //     number: null,
+      //     expireDate: null,
+      //     issuer: null,
+      //     country: null,
+      //     issueDate: null,
+      //     mrz: null,
+      //   },
+      //   bank: {
+      //     _bank_id: null,
+      //     name: null,
+      //     title: null,
+      //     bin: null,
+      //   },
+      //   type: {
+      //     _type_id: null,
+      //     name: null,
+      //     title: null,
+      //   },
+      //   pan: null,
+      //     state: null,
+      //     iban: null,
+      // },
+      object1: {
+
+      },
+      object2: {
+
       },
     };
   },
@@ -244,30 +379,31 @@ export default {
 
   methods: {
     getClients() {
-      fetch('http://192.168.0.100:5001/client', {
+      fetch('http://192.168.0.100:5000/client', {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
         },
       }).then(rawData => rawData.json()).then((clients) => {
+
+        // this.object1.firstName = clients.data[0].client.firstName
+
+        this.object1 = clients.data[0];
+
         console.log(JSON.stringify(clients));
+        console.log(this.object1.client.firstName)
+
+        this.object2 = clients.data[1];
+        console.log(this.object2.client.firstName);
+
       });
     },
   },
 
   created() {
     this.getClients();
-    //    {
-    //   fetch('http://192.168.0.100:5001/client', {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-type': 'application/json'
-    //     }
-    //   }).then(rawData => rawData.json()).then(clients => {
-    //     console.log(JSON.stringify(clients))
-    //   })
-    // }
   },
 
 };
 </script>
+
