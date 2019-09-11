@@ -14,7 +14,7 @@
             <div>
               {{ object1.client.firstName + " " + object1.client.lastName }}
             </div>
-            
+
             <div class="grey--text">
               Номер телефона
             </div>
@@ -22,7 +22,7 @@
               {{ "+"+object1.client.phone }}
             </div>
           </v-flex>
-          
+
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
               Баланс
@@ -37,7 +37,7 @@
               {{ object1.client.birthDate }}
             </div>
           </v-flex>
-          
+
           <v-flex xs2 sm4 md2 class="pa-3">
             <div class="grey--text">
               Статус
@@ -51,16 +51,11 @@
             <div>
               {{ object1.client.personCode }}
             </div>
-            <div class="grey--text">
-              Статус
-            </div>
-            <div>
-              {{ object1.type.title }}
-            </div>
+            
           </v-flex>
-          
+
         </v-layout>
-        
+
         <v-layout row wrap>
           <v-flex class="pa-3" xs12 md6>
             <div class="grey--text">
@@ -94,14 +89,7 @@
               {{ object1.client.birthPlace }}
             </div>
           </v-flex>
-          <v-flex xs6 sm4 md2 class="pa-3">
-            <div class="grey--text">
-              Expires
-            </div>
-            <div>
-              {{ object1.client.document.expireDate }}
-            </div>
-          </v-flex>
+          
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
               Страна
@@ -115,6 +103,12 @@
             <div>
               {{ object1.client.nationality }}
             </div>
+            <div class="grey--text">
+              MRZ
+            </div>
+            <div>
+              {{ object1.client.document.mrz }}
+            </div>
           </v-flex>
           <v-flex xs2 sm4 md2 class="pa-3">
             <div class="grey--text">
@@ -125,8 +119,67 @@
             </div>
           </v-flex>
         </v-layout>
+
+        <v-layout row wrap>
+          <v-flex class="pa-3" xs12 md6>
+            <div class="grey--text">
+              IBAN
+            </div>
+            <div>
+              {{ object1.iban }}
+            </div>
+            <div class="grey--text">
+              PAN
+            </div>
+            <div>
+              {{ object1.pan }}
+            </div>
+            <div class="grey--text">
+              BANK
+            </div>
+            <div>
+              {{ object1.bank.title }}
+            </div>
+            <div class="grey--text">
+              Bank BIN number
+            </div>
+            <div>
+              {{ object1.bank.bin }}
+            </div>
+            
+          </v-flex>
+          <v-flex xs6 sm4 md2 class="pa-3">
+            <div class="grey--text">
+              Единица
+            </div>
+            <div>
+              {{ object1.currency.title }}
+            </div>
+          </v-flex>
+          <v-flex xs6 sm4 md2 class="pa-3">
+            <div class="grey--text">
+              Код единицы
+            </div>
+            <div>
+              {{ object1.currency.code }}
+            </div>
+            
+          </v-flex>
+          
+        </v-layout>
+
+        <v-layout row wrap>
+          <v-flex>
+            <v-img :src="object1.client.photos.nfcFace" ></v-img>
+          </v-flex>
+          <v-flex>
+            <v-img :src="object1.client.photos.selfieDocument" ></v-img>
+          </v-flex>
+        </v-layout>
+
           </v-card>
         </v-flex>
+
 
 
         <v-flex pa-2>
@@ -316,7 +369,6 @@
 </template>
 
 
-
 <script>
 export default {
 
@@ -385,17 +437,15 @@ export default {
           'Content-type': 'application/json',
         },
       }).then(rawData => rawData.json()).then((clients) => {
-
         // this.object1.firstName = clients.data[0].client.firstName
 
         this.object1 = clients.data[0];
 
         console.log(JSON.stringify(clients));
-        console.log(this.object1.client.firstName)
+        console.log(this.object1.client.firstName);
 
         this.object2 = clients.data[1];
         console.log(this.object2.client.firstName);
-
       });
     },
   },
@@ -406,4 +456,3 @@ export default {
 
 };
 </script>
-
