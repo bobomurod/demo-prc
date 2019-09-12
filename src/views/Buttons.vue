@@ -32,9 +32,9 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex class="pa-3" xs12 md6>
-              <input type="text" placeholder="address"></input>
-              <input type="text" placeholder="amount to send"></input>
-              <v-btn class="red-white-text">send</v-btn>
+              <input type="text" placeholder="address" v-model="w2_addressToSend"></input>
+              <input type="text" placeholder="amount to send" v-model="w2_amountToSend"></input>
+              <v-btn class="red-white-text" @click="transfer(wallet1.address, w2_addressToSend, w2_amountToSend)">send</v-btn>
             </v-flex>
           </v-layout>
         </v-card>
@@ -43,17 +43,17 @@
         <v-card>
           <v-layout row wrap>
             <v-flex class="pa-3" xs12 md6>
-              Address: {{ this.wallet1.address }}
+              Address: {{ this.wallet2.address }}
             </v-flex>
             <v-flex class="pa-3" xs12 md6>
-              Balance: {{ this.wallet1.balance }}
+              Balance: {{ this.wallet2.balance }}
             </v-flex>
           </v-layout>
           <v-layout row wrap>
             <v-flex class="pa-3" xs12 md6>
-              <input type="text" placeholder="address"></input>
-              <input type="text" placeholder="amount to send"></input>
-              <v-btn class="red-white-text">send</v-btn>
+              <input type="text" placeholder="address" v-model="w1_addressToSend"></input>
+              <input type="text" placeholder="amount to send" v-model="w1_amountToSend"></input>
+              <v-btn class="red-white-text" @click="transfer(wallet2.address, w1_addressToSend, w1_amountToSend)">send</v-btn>
             </v-flex>
           </v-layout>
         </v-card>
@@ -72,10 +72,15 @@ export default {
     return {
       wallet1: {},
       wallet2: {},
+      w1_addressToSend: null,
+      w1_amountToSend: null,
+      w2_addressToSend: null,
+      w2_amountToSend: null
     }
   },
   methods: {
     loadWallets() {
+
       fetch('http://localhost:2077/init', {
         method: 'POST',
         headers: {
@@ -87,19 +92,40 @@ export default {
       }).then(rawData => rawData.json()).then((wallet) => {
         this.wallet1 = wallet;
       console.log(JSON.stringify(this.wallet1))
+      });
+
+      fetch('http://localhost:2077/init', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            address: 112233
+          })
+      }).then(rawData => rawData.json()).then((wallet) => {
+        this.wallet2 = wallet;
+      console.log(JSON.stringify(this.wallet2))
       })
+
     },
-    transfer() {
+    transfer(from, to, amount) {
       fetch('http://localhost:2077/tx', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-          "from": "332211",
-	        "to": "112233",
-	        "amount": 5000
+          "from": from,
+	        "to": to,
+	        "amount": amount
         })
+      }).then(rawData => rawData.json()).then((status) => {
+        console.log(JSON.stringify(status))
+        this.w1_addressToSend = null;
+        this.w1_amountToSend = null;
+        this.w2_addressToSend = null;
+        this.w2_amountToSend = null;
+        this.loadWallets()
       })
     }
   },
