@@ -60,7 +60,7 @@
       </v-flex>
     </v-layout>
   </v-container>
-    
+
 
   </div>
 </template>
@@ -75,23 +75,22 @@ export default {
       w1_addressToSend: null,
       w1_amountToSend: null,
       w2_addressToSend: null,
-      w2_amountToSend: null
-    }
+      w2_amountToSend: null,
+    };
   },
   methods: {
     loadWallets() {
-
       fetch('http://localhost:2077/init', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-            address: 332211
-          })
+          address: 332211,
+        }),
       }).then(rawData => rawData.json()).then((wallet) => {
         this.wallet1 = wallet;
-      console.log(JSON.stringify(this.wallet1))
+        console.log(JSON.stringify(this.wallet1));
       });
 
       fetch('http://localhost:2077/init', {
@@ -100,13 +99,12 @@ export default {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-            address: 112233
-          })
+          address: 112233,
+        }),
       }).then(rawData => rawData.json()).then((wallet) => {
         this.wallet2 = wallet;
-      console.log(JSON.stringify(this.wallet2))
-      })
-
+        console.log(JSON.stringify(this.wallet2));
+      });
     },
     transfer(from, to, amount) {
       fetch('http://localhost:2077/tx', {
@@ -115,22 +113,22 @@ export default {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-          "from": from,
-	        "to": to,
-	        "amount": amount
-        })
+          from,
+	        to,
+	        amount,
+        }),
       }).then(rawData => rawData.json()).then((status) => {
-        console.log(JSON.stringify(status))
+        console.log(JSON.stringify(status));
         this.w1_addressToSend = null;
         this.w1_amountToSend = null;
         this.w2_addressToSend = null;
         this.w2_amountToSend = null;
-        this.loadWallets()
-      })
-    }
+        this.loadWallets();
+      });
+    },
   },
   created() {
     this.loadWallets();
-  }
+  },
 };
 </script>
