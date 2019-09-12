@@ -39,14 +39,14 @@
           </v-flex>
 
           <v-flex xs2 sm4 md2 class="pa-3">
-            
+
             <div class="grey--text">
               Person Code
             </div>
             <div>
               {{ object1.client.personCode }}
             </div>
-            
+
           </v-flex>
 
         </v-layout>
@@ -84,7 +84,7 @@
               {{ object1.client.birthPlace }}
             </div>
           </v-flex>
-          
+
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
               Страна
@@ -141,7 +141,7 @@
             <div>
               {{ object1.bank.bin }}
             </div>
-            
+
           </v-flex>
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
@@ -158,9 +158,9 @@
             <div>
               {{ object1.currency.code }}
             </div>
-            
+
           </v-flex>
-          
+
         </v-layout>
 
         <v-layout row wrap>
@@ -181,7 +181,6 @@
         </v-layout>
           </v-card>
         </v-flex>
-
 
 
         <v-flex pa-2>
@@ -219,14 +218,14 @@
           </v-flex>
 
           <v-flex xs2 sm4 md2 class="pa-3">
-            
+
             <div class="grey--text">
               Person Code
             </div>
             <div>
               {{ object2.client.personCode }}
             </div>
-            
+
           </v-flex>
 
         </v-layout>
@@ -264,7 +263,7 @@
               {{ object2.client.birthPlace }}
             </div>
           </v-flex>
-          
+
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
               Страна
@@ -321,7 +320,7 @@
             <div>
               {{ object2.bank.bin }}
             </div>
-            
+
           </v-flex>
           <v-flex xs6 sm4 md2 class="pa-3">
             <div class="grey--text">
@@ -338,9 +337,9 @@
             <div>
               {{ object2.currency.code }}
             </div>
-            
+
           </v-flex>
-          
+
         </v-layout>
 
         <v-layout row wrap>
@@ -451,7 +450,7 @@ export default {
         this.object2 = clients.data[1];
         console.log(this.object2.client.firstName);
 
-        console.log(this.object2.client.faceCompare.verified)
+        console.log(this.object2.client.faceCompare.verified);
       });
     },
     loadWallets() {

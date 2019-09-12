@@ -2,9 +2,9 @@
   <div class="home">
     <h1>Transactions page</h1>
     <br>
-        <h3>Wallet: </h3>
+        <h3>Wallets </h3>
 
-    <v-btn class="pink white--text">Press me</v-btn>
+    <!-- <v-btn class="pink white--text">Press me</v-btn>
     <v-btn color="pink" dark depressed>Click me</v-btn>
     <v-btn flat >click me</v-btn>
     <v-btn depressed small class="pink white--text">
@@ -17,7 +17,7 @@
     </v-btn>
     <v-btn depressed small dark fab color="purple">
       <v-icon >star</v-icon>
-    </v-btn>
+    </v-btn> -->
 
   <v-container>
     <v-layout row>
@@ -25,7 +25,7 @@
         <v-card>
           <v-layout row wrap>
             <v-flex class="pa-3" xs12 md6>
-              
+
               Address: {{ this.wallet1.address }}
             </v-flex>
             <v-flex class="pa-3" xs12 md6>
@@ -177,8 +177,8 @@ export default {
       }).then(rawData => rawData.json()).then((agent) => {
         console.log(JSON.stringify(agent));
         this.agentWalletBalance = agent.balance;
-      })
-    }
+      });
+    },
 
   },
   created() {
