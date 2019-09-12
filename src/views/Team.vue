@@ -28,7 +28,7 @@
               Баланс
             </div>
             <div>
-              {{ object1.balance }}
+              {{ wallet1.balance }}
             </div>
             <div class="grey--text">
               Дата рождения
@@ -39,12 +39,7 @@
           </v-flex>
 
           <v-flex xs2 sm4 md2 class="pa-3">
-            <div class="grey--text">
-              Статус
-            </div>
-            <div>
-              {{ object1.type.title }}
-            </div>
+            
             <div class="grey--text">
               Person Code
             </div>
@@ -176,7 +171,14 @@
             <v-img :src="object1.client.photos.selfieDocument" ></v-img>
           </v-flex>
         </v-layout>
-
+        <v-layout >
+          <v-flex >
+            <h2 class="green" v-if="object1.client.faceCompare.verified">verified</h2>
+            <h2 class="red" v-if="!object1.client.faceCompare.verified">unverified</h2>
+            <h3>Совпадение {{ object1.client.faceCompare.selfVsNfc.confidence }} %</h3>
+            <h3> Message: {{ object1.client.faceCompare.message }} </h3>
+          </v-flex>
+        </v-layout>
           </v-card>
         </v-flex>
 
@@ -206,7 +208,7 @@
               Баланс
             </div>
             <div>
-              {{ object2.balance }}
+              {{ wallet2.balance }}
             </div>
             <div class="grey--text">
               Дата рождения
@@ -217,12 +219,7 @@
           </v-flex>
 
           <v-flex xs2 sm4 md2 class="pa-3">
-            <div class="grey--text">
-              Статус
-            </div>
-            <div>
-              {{ object2.type.title }}
-            </div>
+            
             <div class="grey--text">
               Person Code
             </div>
@@ -354,7 +351,14 @@
             <v-img :src="object2.client.photos.selfieDocument" ></v-img>
           </v-flex>
         </v-layout>
-
+        <v-layout>
+          <v-flex>
+            <h2 class="green" v-if="object2.client.faceCompare.verified">verified</h2>
+            <h2 class="red" v-if="!object2.client.faceCompare.verified">unverified</h2>
+            <h3>Совпадение {{ object2.client.faceCompare.selfVsNfc.confidence }} %</h3>
+            <h3> Message: {{ object2.client.faceCompare.message }} </h3>
+          </v-flex>
+        </v-layout>
           </v-card>
         </v-flex>
 
@@ -423,6 +427,8 @@ export default {
       object2: {
 
       },
+      wallet1: {},
+      wallet2: {},
     };
   },
 
@@ -444,12 +450,42 @@ export default {
 
         this.object2 = clients.data[1];
         console.log(this.object2.client.firstName);
+
+        console.log(this.object2.client.faceCompare.verified)
+      });
+    },
+    loadWallets() {
+      fetch('http://localhost:2077/init', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          address: 332211,
+        }),
+      }).then(rawData => rawData.json()).then((wallet) => {
+        this.wallet1 = wallet;
+        console.log(JSON.stringify(this.wallet1));
+      });
+
+      fetch('http://localhost:2077/init', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          address: 112233,
+        }),
+      }).then(rawData => rawData.json()).then((wallet) => {
+        this.wallet2 = wallet;
+        console.log(JSON.stringify(this.wallet2));
       });
     },
   },
 
   created() {
     this.getClients();
+    this.loadWallets();
   },
 
 };

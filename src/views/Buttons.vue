@@ -2,7 +2,8 @@
   <div class="home">
     <h1>Transactions page</h1>
     <br>
-    <h2>Wallet: </h2>
+        <h3>Wallet: </h3>
+
     <v-btn class="pink white--text">Press me</v-btn>
     <v-btn color="pink" dark depressed>Click me</v-btn>
     <v-btn flat >click me</v-btn>
@@ -24,6 +25,7 @@
         <v-card>
           <v-layout row wrap>
             <v-flex class="pa-3" xs12 md6>
+              
               Address: {{ this.wallet1.address }}
             </v-flex>
             <v-flex class="pa-3" xs12 md6>
@@ -61,6 +63,38 @@
     </v-layout>
   </v-container>
 
+  <v-container>
+    <v-layout>
+      <v-flex pa-2>
+        <v-card>
+          <v-layout>
+            <v-flex class="pa-3" xs12 md6>
+              <h2>
+                Пополнение - Кабинет агента
+              </h2>
+            </v-flex>
+          </v-layout>
+          <v-layout>
+            <v-flex class="pa-3 xs12 md6">
+              <h3>
+                Баланс агента: {{ agentWalletBalance}}
+              </h3>
+            </v-flex>
+          </v-layout>
+          <v-layout>
+            <v-flex class="pa-3" xs12 md6>
+              <input type="text" placeholder="адрес кошелька" v-model="depositWalletAddress">
+              <input type="text" placeholder="сумма пополнения" v-model="depositAmount">
+              <br><p></p>
+              <v-btn @click="transfer(88008800, depositWalletAddress, depositAmount)">
+                Пополнить
+              </v-btn>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 
   </div>
 </template>
@@ -76,6 +110,9 @@ export default {
       w1_amountToSend: null,
       w2_addressToSend: null,
       w2_amountToSend: null,
+      agentWalletBalance: null,
+      depositWalletAddress: null,
+      depositAmount: null,
     };
   },
   methods: {
@@ -124,11 +161,29 @@ export default {
         this.w2_addressToSend = null;
         this.w2_amountToSend = null;
         this.loadWallets();
+        this.loadAgentWallet();
       });
     },
+
+    loadAgentWallet() {
+      fetch('http://localhost:2077/init', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          address: 88008800,
+        }),
+      }).then(rawData => rawData.json()).then((agent) => {
+        console.log(JSON.stringify(agent));
+        this.agentWalletBalance = agent.balance;
+      })
+    }
+
   },
   created() {
     this.loadWallets();
+    this.loadAgentWallet();
   },
 };
 </script>
