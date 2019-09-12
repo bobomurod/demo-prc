@@ -21,19 +21,6 @@
 <script>
 
 export default {
-  data() {
-    return {
-      wallet1: {},
-      wallet2: {},
-    }
-  },
-  methods: {
-    loadWallets() {
-      console.log("object")
-    }
-  },
-  created() {
-    this.loadWallets();
-  }
+
 };
 </script>
